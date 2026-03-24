@@ -18,7 +18,7 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [damageCooldown, setDamageCooldown] = useState(false);
   const [attackCooldown, setAttackCooldown] = useState(false);
-  const [screen, setscreen] = useState("home")
+  const [screen, setscreen] = useState("game")
   const ENEMY_DAMAGE = 2; // low damage
 
   // Wave system
@@ -218,16 +218,10 @@ export default function App() {
 
 
 if(screen === "home")
-return(
-  <ImageBackground source={require("./9c4055884116e302936c69e6235ae244.jpg")}style={{flex: 1, backgroundColor: "red"  , justifyContent:'end'}} resizeMode="cover" > 
-  <TouchableOpacity
-              onPress={() => setscreen('game')}
-              style={styles.restartButton}
-            >
-              <Text style={{ color: "white", fontSize: 40, textAlign: 'center' }}>Play Again</Text>
-            </TouchableOpacity>
-      </ImageBackground>
-      
+return(<View style = {{flex: 1, backgroundColor: "red"}}>
+
+
+</View>
 );
 
 if(screen === "game")
@@ -311,7 +305,7 @@ if(screen === "game")
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, height: "100%", width: "100%" }, 
   player: { position: "absolute", alignItems: "center" },
   enemy: { position: "absolute", alignItems: "center" },
   character: { width: 100, height: 100, resizeMode: "contain" },
