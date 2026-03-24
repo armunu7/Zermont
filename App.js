@@ -219,7 +219,7 @@ export default function App() {
 
 if(screen === "home")
 return(
-  <ImageBackground source={require("../9c4055884116e302936c69e6235ae244.jpg")}style={{flex: 1, backgroundColor: "red"  , justifyContent:'end'}} resizeMode="cover" > 
+  <ImageBackground source={require("./9c4055884116e302936c69e6235ae244.jpg")}style={{flex: 1, backgroundColor: "red"  , justifyContent:'end'}} resizeMode="cover" > 
   <TouchableOpacity
               onPress={() => setscreen('game')}
               style={styles.restartButton}
