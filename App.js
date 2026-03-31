@@ -194,7 +194,7 @@ export default function App() {
     return (
       <ImageBackground
         source={require("./9c4055884116e302936c69e6235ae244.jpg")}
-        style={{ flex: 1, backgroundColor: "red", justifyContent: 'flex-end' }}
+        style={{ flex: 1, backgroundColor: "red", justifyContent: 'flex-end', height: "100%", width: "100%"  }}
         resizeMode="cover"
       >
         <TouchableOpacity onPress={() => setscreen('game')} style={styles.restartButton}>
@@ -269,7 +269,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, height: "100%", width: "100%" },
   player: { position: "absolute", alignItems: "center" },
   enemy: { position: "absolute", alignItems: "center" },
   character: { width: 100, height: 100, resizeMode: "contain" },
