@@ -6,17 +6,20 @@ import {
   StyleSheet,
   Animated,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from "react-native";
 
+const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get("window");
+
 export default function App() {
-  const [playerpos, setplayerpos] = useState({ x: 400, y: 300 });
+  const [playerpos, setplayerpos] = useState({ x: SCREEN_W / 2, y: SCREEN_H / 2 });
   const [enemies, setEnemies] = useState([]);
   const [hitEffect, setHitEffect] = useState(false);
   const [playerHealth, setPlayerHealth] = useState(100);
   const [gameOver, setGameOver] = useState(false);
   const keysPressed = useRef({});
-  const playerPosRef = useRef({ x: 400, y: 300 });
+  const playerPosRef = useRef({ x: SCREEN_W / 2, y: SCREEN_H / 2 });
   const handleAttackRef = useRef(null);
   const damageCooldownRef = useRef(false);
   const [score, setScore] = useState(0);
@@ -32,8 +35,8 @@ export default function App() {
     if (waveNumber % 5 === 0) {
       newEnemies.push({
         id: Date.now() + Math.random(),
-        x: 350,
-        y: 200,
+        x: SCREEN_W / 2,
+        y: SCREEN_H / 4,
         health: 300 + waveNumber * 20,
         isBoss: true
       });
@@ -42,8 +45,8 @@ export default function App() {
       for (let i = 0; i < enemyCount; i++) {
         newEnemies.push({
           id: Date.now() + Math.random() + i,
-          x: Math.random() * 700 + 50,
-          y: Math.random() * 500 + 50,
+          x: Math.random() * (SCREEN_W - 100) + 50,
+          y: Math.random() * (SCREEN_H - 100) + 50,
           health: 50 + waveNumber * 5
         });
       }
@@ -91,8 +94,8 @@ export default function App() {
             setTimeout(() => { damageCooldownRef.current = false; }, 1000);
           }
 
-          newX = Math.max(20, Math.min(750, newX));
-          newY = Math.max(20, Math.min(550, newY));
+          newX = Math.max(20, Math.min(SCREEN_W - 60, newX));
+          newY = Math.max(20, Math.min(SCREEN_H - 60, newY));
 
           return { ...enemy, x: newX, y: newY };
         })
@@ -133,8 +136,8 @@ export default function App() {
         if (keys["s"]) y += speed;
         if (keys["a"]) x -= speed;
         if (keys["d"]) x += speed;
-        x = Math.max(20, Math.min(750, x));
-        y = Math.max(20, Math.min(550, y));
+        x = Math.max(20, Math.min(SCREEN_W - 60, x));
+        y = Math.max(20, Math.min(SCREEN_H - 60, y));
         playerPosRef.current = { x, y };
         return { x, y };
       });
@@ -185,8 +188,8 @@ export default function App() {
     setScore(0);
     setWave(1);
     setGameOver(false);
-    setplayerpos({ x: 400, y: 300 });
-    playerPosRef.current = { x: 400, y: 300 };
+    setplayerpos({ x: SCREEN_W / 2, y: SCREEN_H / 2 });
+    playerPosRef.current = { x: SCREEN_W / 2, y: SCREEN_H / 2 };
     spawnWave(1);
   };
 
@@ -194,7 +197,7 @@ export default function App() {
     return (
       <ImageBackground
         source={require("./9c4055884116e302936c69e6235ae244.jpg")}
-        style={{ flex: 1, backgroundColor: "red", justifyContent: 'flex-end', height: "100%", width: "100%"  }}
+        style={{ flex: 1, justifyContent: 'flex-end' }}
         resizeMode="cover"
       >
         <TouchableOpacity onPress={() => setscreen('game')} style={styles.restartButton}>
@@ -269,7 +272,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, height: "100%", width: "100%" },
+  container: { flex: 1 },
   player: { position: "absolute", alignItems: "center" },
   enemy: { position: "absolute", alignItems: "center" },
   character: { width: 100, height: 100, resizeMode: "contain" },
